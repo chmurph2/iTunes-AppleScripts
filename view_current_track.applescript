@@ -14,7 +14,7 @@ try
 		--	if UI elements enabled then
 		tell process "iTunes"
 			tell menu bar 1
-				pick menu item "Go To Current Song" of menu "View"
+				pick menu item "Go To Current Song" of menu "Controls"
 			end tell
 		end tell
 		--	end if
