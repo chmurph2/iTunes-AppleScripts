@@ -1,24 +1,16 @@
-(*
-	Assign this script to a Quicksilver trigger to globally jump to the currently playing track without touching the mouse.
-	I put this script at: ~/Library/Application Support/Quicksilver/PlugIns/iTunes Module.qsplugin/Contents/Resources/Scripts/
-	@author Christopher R. Murphy
-*)
-tell application "iTunes"
-	activate
-end tell
-
-try
-	tell application "System Events"
-		get properties
-		get every process
-		--	if UI elements enabled then
-		tell process "iTunes"
-			tell menu bar 1
-				pick menu item "Go To Current Song" of menu "Controls"
+if appIsRunning("iTunes") then
+	tell application "iTunes" to activate
+	try
+		tell application "System Events"
+			tell process "iTunes"
+				tell menu bar 1 to pick menu item "Go To Current Song" of menu "Controls"
 			end tell
 		end tell
-		--	end if
-	end tell
-end try
-Â
-	
+	end try
+else if appIsRunning("Spotify") then
+	tell application "Spotify" to activate
+end if
+
+on appIsRunning(appName)
+	tell application "System Events" to (name of processes) contains appName
+end appIsRunning
